@@ -1,0 +1,3 @@
+
+Lenet_fpgs/      LeNet for MNIST using CON-FMC
+Yolov2_fpgs/     Yolov2 using CON-FMC

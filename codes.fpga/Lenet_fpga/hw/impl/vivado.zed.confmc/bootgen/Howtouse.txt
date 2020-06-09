@@ -1,0 +1,10 @@
+1. Create boot file
+ - set bit and elf file location in 'zed_bd.bif' file
+ - 'make'
+
+2. Program QSPI flash
+ - set JP10(jumper) to gnd
+ - power on
+ - 'make prog'
+ - power off
+ - set JP10(jumper) to 3.3V

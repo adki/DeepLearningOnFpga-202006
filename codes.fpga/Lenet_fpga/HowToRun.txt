@@ -1,0 +1,55 @@
+Note: use Vivado.2018.3
+
+[Floating point version]
+1. HLS Synthesis
+ - go to 'hw/hls/tcl'
+ - run 'make'
+
+2. VIVADO IP Integrator
+ - go to 'hw/impl/vivado.zed.confmc'
+ - run 'make'
+
+3. Boot file generation
+ - go to 'hw/impl/vivado.zed.confmc/bootgen'
+ - run 'make'
+ - copy 'BOOT.bin' to the SD-CARD and then tun on ZedBoard
+
+4. CON-FMC software (OpenCV is required)
+ - It requires OpenCV and CON-FMC
+ - go to 'sw.native/lenet.confmc' directory
+ - run 'make clean; make'
+
+5. Run with C
+ - go to 'sw.native/lenet.confmc' directory
+ - run './lenet images/0.png'
+
+6. Run with Python
+ - go to 'sw.native/lenet.confmc.python' directory
+ - run './lenet_confmc.py -i images/0.png'
+
+[Fixed-point version]
+1. HLS Synthesis
+ - go to 'hw/hls/tcl.fixed'
+ - run 'make'
+
+2. VIVADO IP Integrator
+ - go to 'hw/impl/vivado.zed.confmc'
+ - run 'make FIXED_POINT=1'
+
+3. Boot file generation
+ - go to 'hw/impl/vivado.zed.confmc/bootgen'
+ - run 'make FIXED_POINT=1'
+ - copy 'BOOT.bin' to the SD-CARD and then tun on ZedBoard
+
+4. CON-FMC software (OpenCV is required)
+ - It requires OpenCV and CON-FMC
+ - go to 'sw.native/lenet.confmc' directory
+ - run 'make clean; make FIXED_POINT=1'
+
+5. Run with C
+ - go to 'sw.native/lenet.confmc' directory
+ - run './lenet images/0.png'
+
+6. Run with Python (not ready yet)
+ - go to 'sw.native/lenet.confmc.python' directory
+ - run './lenet_confmc.py -i images/0.png'

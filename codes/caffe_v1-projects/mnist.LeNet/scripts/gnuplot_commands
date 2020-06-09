@@ -1,0 +1,10 @@
+# gnuplot_commands
+set datafile separator ','
+set term x11 0
+if (!exists("log_train")) log_train='my_model.log.train'
+if (!exists("log_test"))  log_test='my_model.log.test'
+
+plot log_train using 1:4  with line title 'training loss',\
+     log_test  using 1:5 with line title 'test loss'
+set term x11 1
+plot log_test  using 1:4 with line title 'test accuracy'

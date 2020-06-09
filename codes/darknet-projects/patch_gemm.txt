@@ -1,0 +1,64 @@
+--- src/gemm.c	2019-08-18 15:58:35.846653858 +0900
++++ src/gemm_new.c	2019-08-18 15:59:32.918656697 +0900
+@@ -80,7 +80,51 @@
+     free(c);
+ }
+ 
+-
++//------------------------------------------------------------------------------
++// alpha*A*B + beta*C ==> C;
++//
++//      |<-- K -->|     |<-- N -->|     |<-- N -->|
++//    --+---------+   --+---------+   --+---------+
++//    | |         |   | |         |   | |         |
++//    | |         |   | |         |   | |         |
++//    M |   (A)   | x K |   (B)   | = M |   (C)   |
++//    | |         |   | |         |   | |         |
++//    | |         |   | |         |   | |         |
++//    --+---------+   --+---------+   --+---------+
++//
++#ifdef OPENBLAS
++#include <cblas.h>
++void gemm( int    TA
++         , int    TB
++         , int    M
++         , int    N
++         , int    K
++         , float  ALPHA
++         , float *A
++         , int    lda 
++         , float *B
++         , int    ldb
++         , float  BETA
++         , float *C
++         , int    ldc)
++{
++     cblas_sgemm(CblasRowMajor  //OPENBLAS_CONST enum CBLAS_ORDER Order
++                , (TA==0) ? CblasNoTrans : CblasTrans // OPENBLAS_CONST enum CBLAS_TRANSPOSE TransA
++                , (TB==0) ? CblasNoTrans : CblasTrans // OPENBLAS_CONST enum CBLAS_TRANSPOSE TransB
++                ,M              // OPENBLAS_CONST blasint M
++                ,N              // OPENBLAS_CONST blasint N
++                ,K              // OPENBLAS_CONST blasint K
++                ,ALPHA          // OPENBLAS_CONST float alpha
++                ,A              // OPENBLAS_CONST float *A
++                ,lda            // OPENBLAS_CONST blasint lda
++                ,B              // OPENBLAS_CONST float *B
++                ,ldb            // OPENBLAS_CONST blasint ldb
++                ,BETA           // OPENBLAS_CONST float beta
++                ,C              // float *C
++                ,ldc            // OPENBLAS_CONST blasint ldc
++                );
++}
++#else
+ void gemm(int TA, int TB, int M, int N, int K, float ALPHA,
+         float *A, int lda,
+         float *B, int ldb,
+@@ -89,7 +133,7 @@
+ {
+     gemm_cpu( TA,  TB,  M, N, K, ALPHA,A,lda, B, ldb,BETA,C,ldc);
+ }
+-
++#endif
+ 
+ //--------------------------------------------
+ // XNOR bitwise GEMM for binary neural network

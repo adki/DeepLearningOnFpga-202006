@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+  [bootloader]fsbl/fsbl_workspace/fsbl/Debug/fsbl.elf
+  ../zed_bd_wrapper_fixed.bit
+  hello/Debug/hello.elf
+}

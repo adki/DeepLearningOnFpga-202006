@@ -1,0 +1,30 @@
+
+xor-three/   Solving XOR problem using tiny-dnn with three-unit single-hidden network
+             http://linerocks.blogspot.kr/2017/02/solving-xor-problem-using-tiny-dnn_89.html
+
+xor-two/     Solving XOR problem using tiny-dnn with two-unit single-hidden network
+
+four-pixels/          Four-pixel problem with regression (fit)
+                      - Regression using 'fit', but it is not fitting problem
+                      - 'fit' can be used for classificaton
+four-pixels-class/    Four-pixel problem with classification (train)
+                      - Classification using 'train'
+
+lenet-mnist/       LeNet / MNIST
+             $ ./train --epochs 30 --data_path data
+             $ ./test  testset/4.bmp
+
+             train-images-idx3-ubyte.gz:  training set images (9912422 bytes) 
+             train-labels-idx1-ubyte.gz:  training set labels (28881 bytes) 
+             t10k-images-idx3-ubyte.gz:   test set images (1648877 bytes) 
+             t10k-labels-idx1-ubyte.gz:   test set labels (4542 bytes)
+
+lenet-mnist/testset/mnist_png/   Convert MNIST to PNG format (https://github.com/myleott/mnist_png)
+             $ ./convert_mnist_to_png.py ../../tiny-dnn/data png
+
+cifar10/     CIFAR-10
+             $ make
+             $ make dataset
+             $ make testset
+             $ make learn
+             $ make inference
